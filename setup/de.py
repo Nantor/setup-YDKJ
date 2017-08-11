@@ -13,34 +13,8 @@ def extend_parser(parser):
     )
     parser_intro = parser_intro.add_mutually_exclusive_group()
 
-    intros = [
-        'm9',
-        'm10',
-        'm24',
-        'm25',
-        'm26',
-        'm28',
-        'm22',
-        'm23',
-        'm02',
-        'm03',
-        'm04',
-        'm01',
-        'm05',
-        'm06',
-        'm08',
-        'm11',
-        'm13',
-        'm14',
-        'm30',
-        'm31',
-        'm35',
-        'm36',
-        'm33',
-        'm60',
-        'm61',
-        'm62',
-    ]
+    intros = ['m9', 'm10', 'm24', 'm25', 'm26', 'm28', 'm22', 'm23', 'm02', 'm03', 'm04', 'm01', 'm05', 'm06', 'm08',
+              'm11', 'm13', 'm14', 'm30', 'm31', 'm35', 'm36', 'm33', 'm60', 'm61', 'm62', ]
 
     parser_intro.add_argument(
         '-a', '--MothersDay',
