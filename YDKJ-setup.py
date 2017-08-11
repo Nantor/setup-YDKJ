@@ -3,6 +3,7 @@ import argparse
 import importlib
 import os
 import pkgutil
+
 import setup
 
 _package = 'setup'
@@ -40,7 +41,5 @@ if __name__ == '__main__':
     highscore = os.path.join(args.dir, 'AUTOBAHN/HISCORE.DKJ')
     USD = os.path.join(args.dir, 'AUTOBAHN/USD.TXT')
 
-    if not os.path.isfile(highscore) or os.path.isfile(USD):
+    if not os.path.isfile(highscore) or not os.path.isfile(USD):
         raise dir_error
-
-
