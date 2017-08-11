@@ -11,18 +11,18 @@ class SetupYDKJ:
         parser_intro = parser_intro.add_mutually_exclusive_group()
 
         parser_intro.add_argument(
-            '-a', '--Muttertag',
+            '-a', '--MothersDay',
             action='store_const',
             const='m9',
             dest='intro',
-            help='Muttertag'
+            help='Mother\'s Day (Muttertag)'
         )
         parser_intro.add_argument(
-            '-b', '--Vatertag',
+            '-b', '--FathersDay',
             action='store_const',
             const='m10',
             dest='intro',
-            help='Vatertag'
+            help='Fathe\'s Day (Vatertag)'
         )
         parser_intro.add_argument(
             '-c', '--1Advent',
@@ -53,81 +53,81 @@ class SetupYDKJ:
             help='4. Advent'
         )
         parser_intro.add_argument(
-            '-g', '--Ostersonntag',
+            '-g', '--EasterSunday',
             action='store_const',
             const='m22',
             dest='intro',
-            help='Ostersonntag'
+            help='Easter Sunday (Ostersonntag)'
         )
         parser_intro.add_argument(
-            '-h', '--Ostermontag',
+            '-h', '--EasterMonday',
             action='store_const',
             const='m23',
             dest='intro',
-            help='Ostermontag'
+            help='Easter Monday (Ostermontag)'
         )
         parser_intro.add_argument(
-            '-i', '--Allerheiligen',
+            '-i', '--AllSaintsDay',
             action='store_const',
             const='m02',
             dest='intro',
-            help='Allerheiligen'
+            help='All Saints\' Day (Allerheiligen)'
         )
         parser_intro.add_argument(
-            '-j', '--Rosenmontag',
+            '-j', '--CarnivalMonday',
             action='store_const',
             const='m03',
             dest='intro',
-            help='Rosenmontag'
+            help='Carnival Monday (Rosenmontag)'
         )
         parser_intro.add_argument(
-            '-k', '--Fastnachtsdienstag',
+            '-k', '--ShroveTuesday',
             action='store_const',
             const='m04',
             dest='intro',
-            help='Fastnachtsdienstag'
+            help='Shrove Tuesday (Fastnachtsdienstag)'
         )
         parser_intro.add_argument(
-            '-l', '--Aschermittwoch',
+            '-l', '--AshWednesday',
             action='store_const',
             const='m01',
             dest='intro',
-            help='Aschermittwoch'
+            help='Ash Wednesday (Aschermittwoch)'
         )
         parser_intro.add_argument(
             '-m', '--1April',
             action='store_const',
             const='m05',
             dest='intro',
-            help='1. April'
+            help=' (1. April)'
         )
         parser_intro.add_argument(
-            '-n', '--Wheinachtsfeiertag',
+            '-n', '--BoxingDay',
             action='store_const',
             const='m06',
             dest='intro',
-            help='2. Wheinachtsfeiertag'
+            help='Boxing Day (2. Weihnachtsfeiertag)'
         )
         parser_intro.add_argument(
-            '-o', '--Faschingsanfang',
+            '-o', '--Carnivalbegin',
             action='store_const',
             const='m08',
             dest='intro',
-            help='Faschingsanfang'
+            help='Carnival begin (Faschingsanfang)'
         )
         parser_intro.add_argument(
-            '-p', '--TagDerArbeit',
+            '-p', '--LabourDay',
             action='store_const',
             const='m11',
             dest='intro',
-            help='Tag der Arbeit'
+            help='Labour Day (Tag der Arbeit)'
         )
         parser_intro.add_argument(
-            '-q', '--Epiphanie',
+            '-q', '--Epiphany',
             action='store_const',
             const='m13',
             dest='intro',
-            help='Epiphanie (Heilige 3 Könige)'
+            help='Epiphany (Heilige 3 Könige)'
         )
         parser_intro.add_argument(
             '-r', '--Nikolaus',
@@ -137,58 +137,58 @@ class SetupYDKJ:
             help='Nikolaus'
         )
         parser_intro.add_argument(
-            '-s', '--TagDerDeutschenEinheit',
+            '-s', '--GermanUnityDay',
             action='store_const',
             const='m30',
             dest='intro',
-            help='Tag der deutschen Einheit'
+            help='German Unity Day (Tag der deutschen Einheit)'
         )
         parser_intro.add_argument(
-            '-t', '--Valentinstag',
+            '-t', '--ValentinesDay',
             action='store_const',
             const='m31',
             dest='intro',
-            help='Valentinstag'
+            help='Valentine\'s Day (Valentinstag)'
         )
         parser_intro.add_argument(
-            '-u', '--Neujahr',
+            '-u', '--NewYear',
             action='store_const',
             const='m35',
             dest='intro',
-            help='Neujahr'
+            help='New Year (Neujahr)'
         )
         parser_intro.add_argument(
-            '-v', '--Silvester',
+            '-v', '--NewYearsEve',
             action='store_const',
             const='m36',
             dest='intro',
-            help='Silvester'
+            help='New Year\'s Eve (Silvester)'
         )
         parser_intro.add_argument(
-            '-w', '--Weihnachten',
+            '-w', '--Christmas',
             action='store_const',
             const='m33',
             dest='intro',
-            help='Weihnachten'
+            help='Christmas (Weihnachten)'
         )
         parser_intro.add_argument(
-            '-x', '--nach20Uhr',
+            '-x', '--after8pm',
             action='store_const',
             const='m60',
             dest='intro',
-            help='Spielen nach 20 Uhr'
+            help='playing after 8pm (Spielen nach 20 Uhr)'
         )
         parser_intro.add_argument(
-            '-y', '--vor9Uhr',
+            '-y', '--before9am',
             action='store_const',
             const='m61',
             dest='intro',
-            help='Spielen vor 9 Uhr'
+            help='playing before 9am (Spielen vor 9 Uhr)'
         )
         parser_intro.add_argument(
-            '-z', '--vor4Uhr',
+            '-z', '--before4m',
             action='store_const',
             const='m62',
             dest='intro',
-            help='Spielen vor 4 Uhr'
+            help='playing before 4am (Spielen vor 4 Uhr)'
         )

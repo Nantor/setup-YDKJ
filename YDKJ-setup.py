@@ -1,18 +1,27 @@
 # \bin\python3
+import argparse
+import importlib
+import pkgutil
+import setup
+
+
+class Local:
+    package = 'setup'
+
+    def __init__(self, name, parser):
+        self.name = name
+        tmp = importlib.import_module('.' + name, self.package)
+        self.setup = tmp.SetupYDKJ(parser)
+
 
 if __name__ == '__main__':
-    import argparse
-    import pkgutil
-    import sys
+    parser = argparse.ArgumentParser(description='Setup your "You don\'t know Jack" game.', conflict_handler='resolve')
+    subparsers = parser.add_subparsers(help='local help')
+    locales = {}
 
-    languages = [name for _, name, _ in pkgutil.iter_modules(['logic'])]
+    for _, name, _ in pkgutil.iter_modules([Local.package]):
+        sub_parser = subparsers.add_parser(name, help=name + ' help', conflict_handler='resolve')
+        locales[name] = Local(name, sub_parser)
 
-    parser = argparse.ArgumentParser(description='')
-    parser.add_argument('lang', choices=languages, help='Choose the language/version of the game.')
-
-    if len(sys.argv) == 1:
-
-        exit()
-
-    del sys.argv[1]
-    print(sys.argv)
+    parser.parse_args()
+# del sys.argv[1]
