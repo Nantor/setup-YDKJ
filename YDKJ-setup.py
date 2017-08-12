@@ -56,3 +56,10 @@ if __name__ == '__main__':
         highscore_path = pathlib.Path(highscore)
         highscore_path.unlink()
         highscore_path.touch()
+
+    if args.intro is None:
+        pass
+    elif 'original' == str(args.intro).lower():
+        pass
+    else:
+        pass
