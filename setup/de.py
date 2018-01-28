@@ -105,7 +105,7 @@ def extend_parser(parser):
         action='store_const',
         const=intros[12],
         dest='intro',
-        help=' (1. April)'
+        help='April Fool\'s Day (1. April)'
     )
     parser_intro.add_argument(
         '-n', '--BoxingDay',
