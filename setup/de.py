@@ -9,7 +9,7 @@ class SetupYDKJ:
 def extend_parser(parser):
     parser_intro = parser.add_argument_group(
         'intro',
-        'Mit den folgenden Option kann ein spezialles Intro des Spiles einstellt werden.'
+        'Mit den folgenden Option kann ein spezialles Intro des Spiels einstellt werden.'
     )
     parser_intro = parser_intro.add_mutually_exclusive_group()
 
