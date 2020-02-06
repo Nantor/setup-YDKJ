@@ -75,10 +75,6 @@ if __name__ == '__main__':
         with open(USD, 'w') as usd:
             usd.write('WHEN=INTRO // custom intro file \r\n')
             usd.write('\r\n')
-            now = datetime.now()
             for intro in set(args.intro):
                 if intro:
-                    if now.hour > 12:
-                        usd.write('TYPE=TIME TIME=8:00 WHEN=AFTER SOUND={intro}\r\n'.format(intro=intro))
-                    else:
-                        usd.write('TYPE=TIME TIME=16:00 WHEN=BEFORE SOUND={intro}\r\n'.format(intro=intro))
+                    usd.write('TYPE=TIME TIME=0:00 WHEN=AFTER SOUND={intro}\r\n'.format(intro=intro))
