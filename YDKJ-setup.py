@@ -1,11 +1,12 @@
 # \bin\python3
 import argparse
-import importlib
-import os
-import pathlib
-import pkgutil
-
-import setup
+from datetime import datetime
+from importlib import import_module
+from itertools import chain
+from os.path import isdir, isfile, join
+from pathlib import Path
+from pkgutil import iter_modules
+from shutil import copyfile
 
 _package = 'setup'
 
@@ -30,36 +31,54 @@ if __name__ == '__main__':
         action='store_true',
         help='resetting the highscore list'
     )
-    subparsers = parser_all.add_subparsers(help='local help')
+    subparsers = parser_all.add_subparsers(help='Manipulation of the localized intros at the start of the game.',
+                                           dest="locale")
     locales = {}
 
-    for _, name, _ in pkgutil.iter_modules([_package]):
-        sub_parser = subparsers.add_parser(name, dest='locale', help=name + ' help', conflict_handler='resolve')
-        locales[name] = importlib.import_module('.' + name, _package)
+    for _, name, _ in iter_modules([_package]):
+        sub_parser = subparsers.add_parser(name, help='Options to set intors for the locale ' + name,
+                                           conflict_handler='resolve')
+        locales[name] = import_module('.' + name, _package)
         locales[name].extend_parser(sub_parser)
-    parser_all.add_argument('dir', nargs=1, dist='dir', help='directory of the YDKJ game')
+    parser_all.add_argument('dir', help='directory of the YDKJ game')
 
     parser_all.parse_args(namespace=args)
 
     dir_error = ArithmeticError('this ist not a valid YDKJ game directory')
 
-    if not os.path.isdir(args.dir):
+    if not isdir(args.dir):
         raise dir_error
 
-    highscore = os.path.join(args.dir, 'AUTOBAHN/HISCORE.DKJ')
-    USD = os.path.join(args.dir, 'AUTOBAHN/USD.TXT')
+    highscore = join(args.dir, 'AUTOBAHN/HISCORE.DKJ')
+    USD = join(args.dir, 'AUTOBAHN/USD.TXT')
+    USD_BAK = join(args.dir, 'AUTOBAHN/USD.TXT.BAK')
 
-    if not os.path.isfile(highscore) or not os.path.isfile(USD):
+    if not isfile(highscore) or not isfile(USD):
         raise dir_error
 
     if args.reset_highscore:
-        highscore_path = pathlib.Path(highscore)
+        highscore_path = Path(highscore)
         highscore_path.unlink()
         highscore_path.touch()
 
     if args.intro is None:
         pass
-    elif 'original' == str(args.intro).lower():
-        pass
+    elif 'original' in args.intro:
+        if isfile(USD_BAK):
+            copyfile(USD_BAK, USD)
+        else:
+            copyfile(USD, USD_BAK)
     else:
-        pass
+        if not isfile(USD_BAK):
+            copyfile(USD, USD_BAK)
+
+        with open(USD, 'w') as usd:
+            usd.write('WHEN=INTRO // custom intro file \r\n')
+            usd.write('\r\n')
+            now = datetime.now()
+            for intro in set(args.intro):
+                if intro:
+                    if now.hour > 12:
+                        usd.write('TYPE=TIME TIME=8:00 WHEN=AFTER SOUND={intro}\r\n'.format(intro=intro))
+                    else:
+                        usd.write('TYPE=TIME TIME=16:00 WHEN=BEFORE SOUND={intro}\r\n'.format(intro=intro))
