@@ -310,7 +310,7 @@ def extend_parser(parser: argparse.ArgumentParser):
     parser.add_argument(
         '--random',
         action='append_const',
-        const=[choice(INTROS)],
+        const=choice(INTROS),
         dest='intro',
         help='set a random intro'
     )
