@@ -1,6 +1,5 @@
 # \bin\python3
 import argparse
-from importlib import import_module
 from os.path import isdir, isfile, join
 from pathlib import Path
 from pkgutil import iter_modules
@@ -36,7 +35,8 @@ if __name__ == '__main__':
     for _, name, _ in iter_modules([_package]):
         sub_parser = subparsers.add_parser(name, help='Options to set intors for the locale ' + name,
                                            conflict_handler='resolve')
-        locales[name] = import_module('.' + name, _package)
+        locales[name] = __import__(_package + '.' + name, globals(), locals(), ['extend_parser'], 0)
+        # locales[name] = import_module('.' + name, _package)
         locales[name].extend_parser(sub_parser)
     parser_all.add_argument('dir', help='directory of the YDKJ game')
 
@@ -75,4 +75,5 @@ if __name__ == '__main__':
             usd.write('\r\n')
             for intro in set(args.intro):
                 if intro:
-                    usd.write('TYPE=TIME TIME=0:00 WHEN=AFTER SOUND={intro}\r\n'.format(intro=intro))
+                    usd.write(
+                        'TYPE=TIME TIME=0:00 WHEN=AFTER SOUND={intro}\r\n'.format(intro=intro))
