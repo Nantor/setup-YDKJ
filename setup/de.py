@@ -16,32 +16,36 @@ def set_intro_for_today():
     if val_d.month == 5 and val_d.weekday() == 6 and 7 < val_d.day < 15:
         return INTROS[0]
 
+    easter_sunday = spencer_easter_formula(val_d.year)
+
     # Fathe\'s Day (Vatertag)
-    if spencer_easter_formula(val_d.year) + timedelta(days=39) is val_d:
+    if easter_sunday + timedelta(days=39) == val_d:
         return INTROS[1]
 
+    advent_first = first_advent(val_d.year)
+
     # 1. Advent
-    if first_advent(val_d.year) is val_d:
+    if advent_first == val_d:
         return INTROS[2]
 
     # 2. Advent
-    if first_advent(val_d.year) + timedelta(weeks=1) is val_d:
+    if advent_first + timedelta(weeks=1) == val_d:
         return INTROS[3]
 
     # 3. Advent
-    if first_advent(val_d.year) + timedelta(weeks=2) is val_d:
+    if advent_first + timedelta(weeks=2) == val_d:
         return INTROS[4]
 
     # 4. Advent
-    if first_advent(val_d.year) + timedelta(weeks=3) is val_d:
+    if advent_first + timedelta(weeks=3) == val_d:
         return INTROS[5]
 
     # Easter Sunday (Ostersonntag)
-    if spencer_easter_formula(val_d.year) is val_d:
+    if easter_sunday == val_d:
         return INTROS[6]
 
     # Easter Monday (Ostermontag)
-    if spencer_easter_formula(val_d.year) + timedelta(days=1) is val_d:
+    if easter_sunday + timedelta(days=1) == val_d:
         return INTROS[7]
 
     # All Saints\' Day (Allerheiligen)
@@ -49,15 +53,15 @@ def set_intro_for_today():
         return INTROS[8]
 
     # Carnival Monday (Rosenmontag)
-    if spencer_easter_formula(val_d.year) - timedelta(days=48) is val_d:
+    if easter_sunday - timedelta(days=48) == val_d:
         return INTROS[9]
 
     # Shrove Tuesday (Fastnachtsdienstag)
-    if spencer_easter_formula(val_d.year) - timedelta(days=47) is val_d:
+    if easter_sunday - timedelta(days=47) == val_d:
         return INTROS[10]
 
     # Ash Wednesday (Aschermittwoch)
-    if spencer_easter_formula(val_d.year) - timedelta(days=46) is val_d:
+    if easter_sunday - timedelta(days=46) == val_d:
         return INTROS[11]
 
     # April Fool\'s Day (1. April)
