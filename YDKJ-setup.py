@@ -1,5 +1,6 @@
 # \bin\python3
 import argparse
+from datetime import datetime
 from os.path import isdir, isfile, join
 from pathlib import Path
 from pkgutil import iter_modules
@@ -36,7 +37,6 @@ if __name__ == '__main__':
         sub_parser = subparsers.add_parser(name, help='Options to set intors for the locale ' + name,
                                            conflict_handler='resolve')
         locales[name] = __import__(_package + '.' + name, globals(), locals(), ['extend_parser'], 0)
-        # locales[name] = import_module('.' + name, _package)
         locales[name].extend_parser(sub_parser)
     parser_all.add_argument('dir', help='directory of the YDKJ game')
 
@@ -70,10 +70,8 @@ if __name__ == '__main__':
         if not isfile(USD_BAK):
             copyfile(USD, USD_BAK)
 
+        now = datetime.today()
         with open(USD, 'w') as usd:
             usd.write('WHEN=INTRO // custom intro file \r\n')
             usd.write('\r\n')
-            for intro in set(args.intro):
-                if intro:
-                    usd.write(
-                        'TYPE=TIME TIME=0:00 WHEN=AFTER SOUND={intro}\r\n'.format(intro=intro))
+            usd.write('TYPE=DATE DATE={date:%d/%m/%y} SOUND={intro}\r\n'.format(intro=args.intro, date=now))
