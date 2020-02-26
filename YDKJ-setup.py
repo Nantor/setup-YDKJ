@@ -3,8 +3,9 @@ import argparse
 from datetime import datetime
 from os.path import isdir, isfile, join
 from pathlib import Path
-from pkgutil import iter_modules
 from shutil import copyfile
+
+from setup import de
 
 _package = 'setup'
 
@@ -31,13 +32,9 @@ if __name__ == '__main__':
     )
     subparsers = parser_all.add_subparsers(help='Manipulation of the localized intros at the start of the game.',
                                            dest="locale")
-    locales = {}
+    sub_parser = subparsers.add_parser('de', help='Options to set intors for the locale de', conflict_handler='resolve')
+    de.extend_parser(sub_parser)
 
-    for _, name, _ in iter_modules([_package]):
-        sub_parser = subparsers.add_parser(name, help='Options to set intors for the locale ' + name,
-                                           conflict_handler='resolve')
-        locales[name] = __import__(_package + '.' + name, globals(), locals(), ['extend_parser'], 0)
-        locales[name].extend_parser(sub_parser)
     parser_all.add_argument('dir', help='directory of the YDKJ game')
 
     parser_all.parse_args(namespace=args)
