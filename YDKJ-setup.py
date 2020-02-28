@@ -1,6 +1,6 @@
 # \bin\python3
 import argparse
-from datetime import datetime
+from datetime import datetime, timedelta
 from os.path import isdir, isfile, join
 from pathlib import Path
 from shutil import copyfile
@@ -71,4 +71,7 @@ if __name__ == '__main__':
         with open(USD, 'w') as usd:
             usd.write('WHEN=INTRO // custom intro file \r\n')
             usd.write('\r\n')
-            usd.write('TYPE=DATE DATE={date:%d/%m/%y} SOUND={intro}\r\n'.format(intro=args.intro, date=now))
+            usd.write('TYPE=DATE DATE={day}/{month}/{year} SOUND={intro}\r\n'.format(intro=args.intro,
+                                                                                     day=now.day,
+                                                                                     month=now.month,
+                                                                                     year=now.year % 100))
